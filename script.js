@@ -23,8 +23,9 @@ function shuffleDeck() {
   spreadSize = 0;
 
   document.getElementById("spread").innerHTML = "";
+  document.getElementById("summary").innerHTML = "";
 
-  alert("✨ The deck has been shuffled. Choose your spread.");
+  alert("✨ Deck shuffled. Now choose a spread.");
 }
 
 function startReading(size) {
@@ -36,42 +37,46 @@ function startReading(size) {
   spreadSize = size;
 
   document.getElementById("spread").innerHTML = "";
+  document.getElementById("summary").innerHTML = "";
 
-  alert(`Choose ${size} cards intuitively.`);
+  alert("Now click the deck to draw cards.");
 }
 
-document.getElementById("deck").addEventListener("click", drawCard);
+// IMPORTANT: ensure this runs AFTER page loads
+window.onload = function () {
+  const deckEl = document.getElementById("deck");
+  if (deckEl) {
+    deckEl.addEventListener("click", drawCard);
+  }
+};
 
 function drawCard() {
   if (spreadSize === 0) {
-    alert("Shuffle and select a spread first.");
+    alert("Please shuffle and choose a spread first.");
     return;
   }
 
   if (currentSpread.length >= spreadSize) return;
 
   const card = shuffledDeck.pop();
-
   currentSpread.push(card);
 
   renderSpread();
-}
-
-function renderSpread() {
-  const spread = document.getElementById("spread");
-
-  spread.innerHTML = currentSpread.map(c => {
-    return `<div class="card">${c}</div>`;
-  }).join("");
 
   if (currentSpread.length === spreadSize) {
     showSummary();
   }
 }
 
+function renderSpread() {
+  document.getElementById("spread").innerHTML = currentSpread
+    .map(c => `<div class="card">${c}</div>`)
+    .join("");
+}
+
 function showSummary() {
   document.getElementById("summary").innerHTML = `
     <h2>✨ Reading Complete</h2>
-    <p>This spread reflects your current energetic alignment. Reflect on how each card connects rather than standing alone.</p>
+    <p>This spread reflects your current energetic pattern. Each card speaks in relation to the others, not alone.</p>
   `;
 }

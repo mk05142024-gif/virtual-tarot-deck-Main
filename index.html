@@ -1,1 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Celestial Arcana</title>
 
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <div class="app">
+
+    <h1>✨ Celestial Arcana ✨</h1>
+    <p class="subtitle">Read the stars. Reveal the self.</p>
+
+    <div class="controls">
+      <button onclick="shuffleDeck()">✨ Shuffle Deck</button>
+      <button onclick="startReading(3)">3 Card Spread</button>
+      <button onclick="startReading(5)">5 Card Spread</button>
+    </div>
+
+    <div id="table">
+      <div id="deck"></div>
+      <div id="spread"></div>
+    </div>
+
+    <div id="summary"></div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
